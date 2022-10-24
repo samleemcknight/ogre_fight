@@ -36,7 +36,6 @@ public class Knight implements WeaponChoices {
     }
 
     public Weapon chooseWeapon(String weapon) {
-        System.out.println(weapon.equals(WeaponChoices.axe));
         if (weapon.equals(WeaponChoices.sword)) {
             this.equippedWeapon = new Sword();
         } else if (weapon.equals(WeaponChoices.axe)) {

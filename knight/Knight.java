@@ -1,20 +1,16 @@
 package knight;
+import fighter.Fighter;
 import java.util.Arrays;
 import weapon.*;
 
-public class Knight implements WeaponChoices {
+public class Knight extends Fighter implements WeaponChoicesHuman {
     public Weapon[] weapons;
-    public Weapon equippedWeapon;
     public String name;
-    public int healthPoints;
-    public int level;
 
-    public Knight(String weapon, String name, int healthPoints, int level) {
-        this.equippedWeapon = this.chooseWeapon(weapon);
+    public Knight(Weapon weapon, String name, int healthPoints, int level) {
+        super(weapon, healthPoints, level);
         this.name = name;
-        this.healthPoints = healthPoints;
-        this.level = level;
-        this.weapons = Knight.addElement(this.weapons, this.equippedWeapon);
+        this.weapons = new Weapon[]{weapon};
     }
 
     public static Weapon[] addElement(Weapon[] arr, Weapon element) {
@@ -35,13 +31,16 @@ public class Knight implements WeaponChoices {
         this.weapons = Knight.addElement(this.weapons, this.equippedWeapon);
     }
 
-    public Weapon chooseWeapon(String weapon) {
-        if (weapon.equals(WeaponChoices.sword)) {
-            this.equippedWeapon = new Sword();
-        } else if (weapon.equals(WeaponChoices.axe)) {
-            this.equippedWeapon = new Axe();
+    public static Weapon chooseWeapon(String weaponName) {
+        Weapon equippedWeapon;
+        if (weaponName.equals(WeaponChoicesHuman.sword)) {
+            equippedWeapon = new Sword();
+        } else if (weaponName.equals(WeaponChoicesHuman.axe)) {
+            equippedWeapon = new Axe();
+        } else {
+            equippedWeapon = new Hands();
         }
-        return this.equippedWeapon;
+        return equippedWeapon;
     }
 
     public void changeName(String name) {

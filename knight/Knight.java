@@ -8,7 +8,7 @@ public class Knight extends Fighter implements WeaponChoicesHuman {
     public String name;
 
     public Knight(Weapon weapon, String name, int healthPoints, int level) {
-        super(weapon, healthPoints, level);
+        super(weapon, healthPoints, level, "knight");
         this.name = name;
         this.weapons = new Weapon[]{weapon};
     }
@@ -45,19 +45,6 @@ public class Knight extends Fighter implements WeaponChoicesHuman {
 
     public void changeName(String name) {
         this.name = name;
-    }
-
-    public int attack() {
-        int maxDamage = this.equippedWeapon.maxDamage;
-        int minDamage = this.equippedWeapon.minDamage;
-        int attackDamage = (int)Math.floor(Math.random()*(maxDamage-minDamage)+minDamage);
-        return attackDamage;
-    }
-
-    public void takeDamage(int damage) {
-        int currentHP = this.healthPoints;
-        int newHP = currentHP - damage;
-        this.healthPoints = newHP;
     }
 
     public void printWeapons() {

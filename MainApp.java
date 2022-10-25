@@ -52,6 +52,6 @@ public class MainApp implements WeaponChoicesHuman {
         System.out.println("Your weapon of choice is a " + myKnight.equippedWeapon.name);
         newScanner.close();
         Ogre theOgre = new Ogre();
-        System.out.println("Your enemey is a level " + theOgre.level + " ogre with sharp " + theOgre.equippedWeapon.name + " and " + theOgre.healthPoints + " HP");
+        System.out.println("Your enemey is a level " + theOgre.level + " ogre with " + theOgre.equippedWeapon.name + " and " + theOgre.healthPoints + " HP");
     }
 }

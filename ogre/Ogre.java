@@ -1,18 +1,21 @@
 package ogre;
 import fighter.Fighter;
-import weapon.Claws;
+import weapon.*;
 
-public class Ogre extends Fighter {
+public class Ogre extends Fighter implements WeaponChoicesOgre {
     public Ogre() {
-        super(new Claws(), 55, 1);
+        super(new Claws(), 55, 1, "ogre");
         this.equippedWeapon = super.equippedWeapon;
         this.healthPoints = super.healthPoints;
     }
 
-    public int attack() {
-        int maxDamage = this.equippedWeapon.maxDamage;
-        int minDamage = this.equippedWeapon.minDamage;
-        int attackDamage = (int)Math.floor(Math.random()*(maxDamage-minDamage)+minDamage);
-        return attackDamage;
+    public void switchWeapon(String weaponName) {
+        if (weaponName.equals(WeaponChoicesOgre.club)) {
+            this.equippedWeapon = new Club();
+        } else if (weaponName.equals(WeaponChoicesOgre.rock)) {
+            this.equippedWeapon = new Rock();
+        } else {
+            this.equippedWeapon = new Claws();
+        }    
     }
 }

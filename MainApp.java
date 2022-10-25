@@ -1,8 +1,9 @@
 import knight.Knight;
-import weapon.WeaponChoices;
+import ogre.Ogre;
+import weapon.*;
 import java.util.Scanner;
 
-public class MainApp implements WeaponChoices {
+public class MainApp implements WeaponChoicesHuman {
 
     public static Scanner newScanner() {
         Scanner newScanner = new Scanner(System.in);
@@ -15,17 +16,17 @@ public class MainApp implements WeaponChoices {
         return myName;
     }
 
-    public static String chooseWeapon(Scanner myScanner) {
+    public static Weapon chooseWeapon(Scanner myScanner) {
         String myWeapon = "";
         boolean isValidWeapon = false;
-        System.out.println("What is thy chosen weapon? ['help' to see weapon choices]");
+        System.out.println("What is thy chosen weapon? [type 'help' to see weapon choices]");
         while (!isValidWeapon) {
             myWeapon = myScanner.nextLine();
             if (myWeapon.equals("help")) {
-                WeaponChoices.seeWeaponChoices();
+                WeaponChoicesHuman.seeWeaponChoicesHuman();
                 myWeapon = myScanner.nextLine();
             }
-            for (String element: weaponChoices) {
+            for (String element: weaponChoicesHuman) {
                 if (element.equals(myWeapon)) {
                     isValidWeapon = true;
                 }
@@ -34,19 +35,23 @@ public class MainApp implements WeaponChoices {
                 System.out.println("not valid weapon - please choose again");
             }
         }
-        return myWeapon;
+        
+        return Knight.chooseWeapon(myWeapon);
     }
 
 
     public static void main (String[] args) {
         Scanner newScanner = new Scanner(System.in);
-        System.out.println("Welcome to Knight fight! Can you defeat the ogre?");
         Scanner myScanner = MainApp.newScanner();
+        System.out.println("Welcome to Ogre fight! Can you defeat the ogre?");
         String myName = MainApp.setName(myScanner);
-        String myWeapon = MainApp.chooseWeapon(myScanner);
+        Weapon myWeapon = MainApp.chooseWeapon(myScanner);
         Knight myKnight = new Knight(myWeapon, myName, 20, 1);
         System.out.println("You are a level " + myKnight.level + " knight!");
+        myKnight.printWeapons();
         System.out.println("Your weapon of choice is a " + myKnight.equippedWeapon.name);
         newScanner.close();
+        Ogre theOgre = new Ogre();
+        System.out.println("Your enemey is a level " + theOgre.level + " ogre with sharp " + theOgre.equippedWeapon.name + " and " + theOgre.healthPoints + " HP");
     }
 }

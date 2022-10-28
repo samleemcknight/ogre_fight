@@ -47,6 +47,16 @@ public class Knight extends Fighter implements WeaponChoicesHuman {
         this.name = name;
     }
 
+    public void dodge(int attackDamage) {
+        int dexterity = 13;
+        int dodgeProbability = (int)Math.floor(Math.random()*(dexterity-0)+1);
+        if (dodgeProbability < 10) {
+         this.takeDamage(attackDamage);   
+        } else {
+            System.out.println("The knight has dodged the blow!");
+        }
+    }
+
     public void printWeapons() {
         System.out.println(Arrays.toString(this.weapons));
     }

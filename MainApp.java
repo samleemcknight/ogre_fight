@@ -1,6 +1,7 @@
 import knight.Knight;
 import ogre.Ogre;
 import weapon.*;
+import fightmechanics.Fight;
 import java.util.Scanner;
 
 public class MainApp implements WeaponChoicesHuman {
@@ -48,10 +49,12 @@ public class MainApp implements WeaponChoicesHuman {
         Weapon myWeapon = MainApp.chooseWeapon(myScanner);
         Knight myKnight = new Knight(myWeapon, myName, 20, 1);
         System.out.println("You are a level " + myKnight.level + " knight!");
-        myKnight.printWeapons();
         System.out.println("Your weapon of choice is a " + myKnight.equippedWeapon.name);
         newScanner.close();
         Ogre theOgre = new Ogre();
         System.out.println("Your enemey is a level " + theOgre.level + " ogre with " + theOgre.equippedWeapon.name + " and " + theOgre.healthPoints + " HP");
+        System.out.println("Begin fighting!");
+        Fight newFight = new Fight();
+        newFight.fightLoop(myKnight, theOgre);
     }
 }

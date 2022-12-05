@@ -4,7 +4,7 @@ import weapon.*;
 
 public class Ogre extends Fighter implements WeaponChoicesOgre {
     public Ogre() {
-        super(new Claws(), 55, 1, "ogre");
+        super(new Claws(), 35, 1, "ogre");
         this.equippedWeapon = super.equippedWeapon;
         this.healthPoints = super.healthPoints;
     }

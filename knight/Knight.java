@@ -1,6 +1,7 @@
 package knight;
 import fighter.Fighter;
 import java.util.Arrays;
+import java.util.Scanner;
 import weapon.*;
 
 public class Knight extends Fighter implements WeaponChoicesHuman {
@@ -26,6 +27,29 @@ public class Knight extends Fighter implements WeaponChoicesHuman {
         return newArr;
     }
 
+    public static Weapon chooseWeaponPrompt(Scanner myScanner) {
+        String myWeapon = "";
+        boolean isValidWeapon = false;
+        System.out.println("What is thy chosen weapon? [type 'help' to see weapon choices]");
+        while (!isValidWeapon) {
+            myWeapon = myScanner.nextLine();
+            if (myWeapon.equals("help")) {
+                WeaponChoicesHuman.seeWeaponChoicesHuman();
+                myWeapon = myScanner.nextLine();
+            }
+            for (String element: weaponChoicesHuman) {
+                if (element.equals(myWeapon)) {
+                    isValidWeapon = true;
+                }
+            }
+            if (!isValidWeapon) {
+                System.out.println("not valid weapon - please choose again");
+            }
+        }
+        
+        return Knight.chooseWeapon(myWeapon);
+    }
+
     public void changeWeapon(Weapon equippedWeapon) {
         this.equippedWeapon = equippedWeapon;
         this.weapons = Knight.addElement(this.weapons, this.equippedWeapon);
@@ -45,6 +69,16 @@ public class Knight extends Fighter implements WeaponChoicesHuman {
 
     public void changeName(String name) {
         this.name = name;
+    }
+
+    public void dodge(int attackDamage) {
+        int dexterity = 13;
+        int dodgeProbability = (int)Math.floor(Math.random()*(dexterity-0)+1);
+        if (dodgeProbability < 10) {
+         this.takeDamage(attackDamage);   
+        } else {
+            System.out.println("The knight has dodged the blow!");
+        }
     }
 
     public void printWeapons() {
